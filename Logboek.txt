@@ -1,0 +1,23 @@
+15-10-2023:
+Eindelijk RainbowDQN werkend gekregen en het model is al beter dan eerst.
+
+Begin gemiddelde reward:
+-95
+
+Gemiddelde reward op het moment:
+-40
+
+Mogelijke oorzaak, gewoon alles droppen is betere reward dan alles naar links/rechts.
+
+Mogelijke oplossing (TODO):
+Punishment voor te hoog bouwen (of verschil in hoogte)
+
+
+
+16-10-2023:
+Zelfde probleem als gisteren, mogelijke oplossing.
+Reward geven als height difference klein is
+
+Nog een probleem, alles gaat naar rechts toe:
+TODO: Mogelijke oplossing, verdeling van blokken als reward geven.
+OF height difference schaalbaar maken + berekeningen om rewards te laten sturen

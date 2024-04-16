@@ -1,0 +1,63 @@
+- De step en reset functie moeten iets returnen, in ieder geval de state van het spel en in geval van de step functie ook een reward.
+
+- De grootte van de q_table moet misschien worden aangepast in plaats van 20 x 10 moet het 40 x 20 omdat elke cel 0 of 1 kan zijn mogelijk moet het ook wel 2^200 zijn
+  en anders gwn andere logica toepassen.
+
+- Reward systeem bouwen:
+    - +1 voor één laag gecleard
+    - +2 voor twee lagen gecleard
+    - +3 voor drie lagen gecleard
+    - +10 voor vier lagen gecleard
+    - -5 voor een gat gemaakt die niet direct kan worden ingevuld
+    - Misschien -1 voor ongenodig veel moves (later)
+
+
+
+ERROR HAS BEEN ENCOUNTERED:
+De Q-Table is te groot dus er moet een oplossing komen
+State space veranderen van alle blokjes naar wat echt belangrijk is. Waar de piece terecht komt
+
+OPTIE 1:
+Een I-piece kan bijvoorbeeld verticaal op 10 verschillende plekken en horizontaal op X verschillende plekken
+
+1 breed is 10 opties
+2 breed is 9 opties
+3 breed is 8 opties
+4 breed is 7 opties
+
+OPTIE 2:
+Hoeveel blokjes onder de piece die wordt geplaatst leeg zijn en hoeveel niet, makkelijk punishment berekenen
+
+Alles keer vier om aan te geven hoeveel layers er worden gecleard
+
+1 * 10
+9 * 9
+8 * 8
+1 * 7
+= 162
+* 4 = 648
+
+
+
+
+
+
+
+
+
+
+
+Tetris AI V4:
+Geen reinforcement learning :(, want het is te moeilijk en niet haalbaar)
+
+Maar termen worden hergebruikt:
+
+Action space:
+Alle plekken waar de piece terecht kan (inclusief alle rotaties, in andere woorden de O-piece heeft een kleine action space terwijl de T-piece een grote action space heeft)
+
+Reward system:
+Straight forward, holes zijn punishment en de rest is reward maar te hoog gaan is ook weer punishment
+
+Observeration space:
+???
+Eigenlijk weer de 2^200 state of de game

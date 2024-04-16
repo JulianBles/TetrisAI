@@ -1,0 +1,8 @@
+List for possible solution or TODOs for solving problem of hard dropping constantly:
+
+- Randomness toevoegen aan de keuze van de action !!!
+- Backwards functie pas aanroepen als piece is gedropt, hierdoor worden goed geplaatste pieces meer beloond als ze goed zijn en meer afgestrafd als ze slecht zijn
+- Reward functie updaten om insta hard droppen die met geluk worden geplaatst te punishen
+- Verschillende neural networks proberen met mogelijk verschillende inputs (14 of 200)
+- Van ChatGPT: Regularization Techniques: Introduce regularization techniques (e.g., dropout) to prevent overfitting, especially if your neural network is complex.
+- Anders laatste optie, terug naar DQN/PPO en policies. Nadeel: reward functie moet beter zijn. Voordeel: doet het waarschijnlijk in het algemeen wel beter.
