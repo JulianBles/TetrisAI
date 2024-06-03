@@ -107,41 +107,41 @@ class Tetris(gym.Env):
         return temp
     
     def retrieve_state(self):
-        # state = []
+        state = []
 
-        # # First 10 elements are height of each column
-        # for column in range(self.width):
-        #     max_height = self.height
-        #     for row in range(self.height):
-        #         if self.field[row][column] > 0:
-        #             max_height = row
-        #     state.append(self.height - max_height)
+        # First 10 elements are height of each column
+        for column in range(self.width):
+            max_height = self.height
+            for row in range(self.height):
+                if self.field[row][column] > 0:
+                    max_height = row
+            state.append(self.height - max_height)
 
-        # state.append(self.figure.x)
-        # state.append(self.figure.y)
-        # state.append(self.figure.type)
-        # state.append(self.figure.rotation)
+        state.append(self.figure.x)
+        state.append(self.figure.y)
+        state.append(self.figure.type)
+        state.append(self.figure.rotation)
 
-        # return state
+        return state
 
-        figure_coordinates = []
-        for i in range(4):
-            for j in range(4):
-                if i * 4 + j in self.figure.image():
-                    figure_coordinates.append((i + self.figure.y, j + self.figure.x))
+        # figure_coordinates = []
+        # for i in range(4):
+        #     for j in range(4):
+        #         if i * 4 + j in self.figure.image():
+        #             figure_coordinates.append((i + self.figure.y, j + self.figure.x))
 
-        new_field = []
-        for row in range(self.height):
-            # temp_field = []
-            for column in range(self.width):
-                if ((row, column) in figure_coordinates and self.field[row][column] == 0) or self.field[row][column] > 0:
-                    new_field.append(1)
-                else:
-                    new_field.append(0)
+        # new_field = []
+        # for row in range(self.height):
+        #     # temp_field = []
+        #     for column in range(self.width):
+        #         if ((row, column) in figure_coordinates and self.field[row][column] == 0) or self.field[row][column] > 0:
+        #             new_field.append(1)
+        #         else:
+        #             new_field.append(0)
 
-            # new_field.append(temp_field)
+        #     # new_field.append(temp_field)
 
-        return new_field
+        # return new_field
     
     def print_field(self, field):
         print("Printing field:")
@@ -331,7 +331,7 @@ class Tetris(gym.Env):
 
 
     def calculate_reward(self):
-        reward = -0.1
+        reward = -1
 
         piece_placed = self.new_reward_gotten
         if self.new_reward_gotten == True:
@@ -339,23 +339,23 @@ class Tetris(gym.Env):
             self.new_reward_gotten = False
 
             if self.nr_of_holes_changed:
-                reward = -0.5
+                reward = -30
                 # reward += self.calculate_piece_placement_reward()
             else:
                 if self.current_reward == 0: # No lines
-                    reward = 0.5
+                    reward = 30
                     # reward += self.calculate_piece_placement_reward()
                 elif self.current_reward == 1: # One line
-                    reward = 0.6
+                    reward = 60
                 elif self.current_reward == 2: # Two lines
-                    reward = 0.7
+                    reward = 70
                 elif self.current_reward == 3: # Three lines
-                    reward = 0.8
+                    reward = 80
                 elif self.current_reward == 4: # Four lines (tetris)
-                    reward = 1
+                    reward = 100
 
         if self.state == "gameover":
-            reward = -1
+            reward = -100
 
         return float(reward), piece_placed
     
