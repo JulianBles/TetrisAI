@@ -331,7 +331,7 @@ class Tetris(gym.Env):
 
 
     def calculate_reward(self):
-        reward = -1
+        reward = -0.1
 
         piece_placed = self.new_reward_gotten
         if self.new_reward_gotten == True:
@@ -339,12 +339,15 @@ class Tetris(gym.Env):
             self.new_reward_gotten = False
 
             if self.nr_of_holes_changed:
-                reward = -30
-                # reward += self.calculate_piece_placement_reward()
+                reward = -20
+                reward = self.calculate_piece_placement_reward(reward)
             else:
+                if self.current_reward > 0:
+                    print("LINE CLEARED")
+
                 if self.current_reward == 0: # No lines
-                    reward = 30
-                    # reward += self.calculate_piece_placement_reward()
+                    reward = 15
+                    reward = self.calculate_piece_placement_reward(reward)
                 elif self.current_reward == 1: # One line
                     reward = 60
                 elif self.current_reward == 2: # Two lines
@@ -359,13 +362,11 @@ class Tetris(gym.Env):
 
         return float(reward), piece_placed
     
-    def calculate_piece_placement_reward(self):
-        reward = 0
-
+    def calculate_piece_placement_reward(self, reward):
         if self.placed_height >= self.height_difference[1]:
-            reward = -30
+            reward -= self.height_difference[1]
         elif self.placed_height < self.height_difference[1]:
-            reward = (self.height - self.placed_height)
+            reward += (self.height - self.placed_height)
 
         # reward -= (self.height_difference[0] - 4)
 
